@@ -22,7 +22,8 @@ public class MongoTest {
             MongoCollection collection=database.getCollection("gotei");
             
             Map <String, Object> json=new HashMap<>();
-            
+            json.put("name", "Yamamoto");
+            json.put("zanpakutou", "Ryuujin Jakka");
             Document captain= new Document(json);
             collection.insertOne(captain);
         }
