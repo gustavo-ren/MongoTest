@@ -4,10 +4,6 @@ package mongotest;
  *
  * @author Gustavo
  */
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
-
-import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoCollection;
 
 import static com.mongodb.client.model.Filters.*;
