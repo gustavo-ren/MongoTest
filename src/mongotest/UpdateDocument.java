@@ -15,17 +15,19 @@ import org.bson.Document;
  */
 public class UpdateDocument {
 
-    private MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://localhost:27017"));
-    private MongoDatabase database = mongoClient.getDatabase("bleach");
-    private MongoCollection<Document> collection = database.getCollection("gotei");
-    
     public void updateSelected(String id) {
         
-        Map<String, Object> update=new HashMap<>();
-        update.put("zanpakutou", "Haguro tonbo");
-        
-        this.collection.findOneAndUpdate(eq("_id", id), new Document("$set", new Document(update)));
-        mongoClient.close();
+        try (MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://localhost:27017"))) {
+            
+            MongoDatabase database = mongoClient.getDatabase("bleach");
+            MongoCollection<Document> collection = database.getCollection("gotei");
+            
+            Map<String, Object> update = new HashMap<>();
+            update.put("zanpakutou", "Haguro tonbo");
+
+            collection.findOneAndUpdate(eq("_id", id), new Document("$set", new Document(update)));
+            mongoClient.close();
+        }
     }
-    
+
 }
