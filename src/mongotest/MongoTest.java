@@ -1,11 +1,14 @@
 package mongotest;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
+import org.bson.BSON;
 import org.bson.Document;
 
 /**
@@ -17,17 +20,15 @@ public class MongoTest {
 
     public static void main(String[] args) throws Exception {
         
-        try (MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://localhost:27017"))) {
-            MongoDatabase database=mongoClient.getDatabase("bleach");
-            MongoCollection collection=database.getCollection("gotei");
-            
-            Map <String, Object> json=new HashMap<>();
-            json.put("name", "Yamamoto");
-            json.put("zanpakutou", "Ryuujin Jakka");
-            Document captain= new Document(json);
-            collection.insertOne(captain);
-        }
+        Scanner in=new Scanner(System.in);
         
+        String id=in.nextLine();
+        String name=in.nextLine();
+        String zanpakutou=in.nextLine();
+        
+        InsertDocument insertDocument=new InsertDocument(id, name, zanpakutou);
+        
+        insertDocument.insert();
     }
 
 }
