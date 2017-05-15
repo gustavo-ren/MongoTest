@@ -22,22 +22,28 @@ public class SearchDocument {
     }
 
     public void select(String id) {
-        try (MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://localhost:27017"))) {
-            MongoDatabase database = mongoClient.getDatabase("bleach");
-            MongoCollection<Document> collection = database.getCollection("gotei");
+        
+        ConectionFactory factory=new ConectionFactory();        
+        try {
+            
+            MongoCollection<Document> collection=factory.getCollection();
             Document myDoc;
             myDoc = collection.find(eq("_id", id)).first();
             System.out.println(myDoc.toJson());
+        }finally{
+            factory.finish();
         }
     }
 
     public Document selectAndReturn(String id) {
-        try (MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://localhost:27017"))) {
-            MongoDatabase database = mongoClient.getDatabase("bleach");
-            MongoCollection<Document> collection = database.getCollection("gotei");
+        
+        ConectionFactory factory=new ConectionFactory(); 
+        try {
+            MongoCollection<Document> collection=factory.getCollection();
             Document myDoc = collection.find(eq("_id", id)).first();
-            mongoClient.close();
             return myDoc;
+        }finally{
+            factory.finish();
         }
     }
 

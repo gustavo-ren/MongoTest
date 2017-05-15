@@ -1,7 +1,5 @@
 package mongotest;
 
-import java.util.Scanner;
-
 /**
  *
  * @author Gustavo
