@@ -5,6 +5,9 @@
  */
 package mongotest;
 
+import java.util.HashMap;
+import java.util.Map;
+import org.bson.Document;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -18,6 +21,10 @@ import static org.junit.Assert.*;
  */
 public class SearchDocumentTest {
     
+    private InsertDocument insertDocument=new InsertDocument("as", "Aizen Sosuke", "Kyouka Suigetsu");
+    Map <String, Object> map=new HashMap<>();
+    Document doc;
+    
     public SearchDocumentTest() {
     }
     
@@ -30,7 +37,12 @@ public class SearchDocumentTest {
     }
     
     @Before
-    public void setUp() {
+    public void setUp() {        
+        //insertDocument.insert();
+        map.put("_id", "as");
+        map.put("name", "Aizen Sosuke");
+        map.put("zanpakutou", "Kyouka Suigetsu");
+        doc=new Document(map);
     }
     
     @After
@@ -41,13 +53,13 @@ public class SearchDocumentTest {
      * Test of selectAllRecordsFromACollection method, of class SearchDocument.
      */
     @Test
-    public void testSelectAllRecordsFromACollection() {
+    public void testSelectAndReturn() {
         System.out.println("selectAllRecordsFromACollection");
-        String id = "";
+        String id = "as";
         SearchDocument instance = new SearchDocument();
-        instance.selectAllRecordsFromACollection(id);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Document doc1=instance.selectAndReturn(id);
+        System.out.println(doc.toString()+" "+ this.doc.toString());
+        assertEquals(doc1.toString(), this.doc.toString());
     }
     
 }
