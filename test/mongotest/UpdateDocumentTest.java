@@ -45,7 +45,6 @@ public class UpdateDocumentTest {
         System.out.println("updateSelected");
         String id = "";
         UpdateDocument instance = new UpdateDocument();
-        instance.updateSelected(id);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

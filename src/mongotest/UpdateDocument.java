@@ -12,14 +12,14 @@ import org.bson.Document;
  */
 public class UpdateDocument {
 
-    public void updateSelected(String id) {
+    public void updateSelected(String id, String field, String newValue) {
         
         ConectionFactory factory=new ConectionFactory();
         
         try {
             
             Map<String, Object> update = new HashMap<>();
-            update.put("zanpakutou", "Haguro tonbo");
+            update.put(field, newValue);
             
             MongoCollection<Document> collection=factory.getCollection();
             collection.findOneAndUpdate(eq("_id", id), new Document("$set", new Document(update)));
